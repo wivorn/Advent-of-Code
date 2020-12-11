@@ -29,10 +29,12 @@ else:
 try:
     f = open(f'{year}/python/day{day}/answer.py', mode='w')
     f.writelines([
-        'import os.path\n\n',
+        "import os.path\n\n",
         f"input_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '../../input/day{day}')\n\n",
-        'with open(input_path) as f:\n',
-        '   input = f.read()\n'
+        "with open(input_path) as f:\n",
+        "   input = f.read().strip().split('\n')\n\n",
+        "   print(f'Part 1: {}')\n",
+        "   print(f'Part 2: {}')\n"
     ])
     f.close()
 except:
