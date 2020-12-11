@@ -1,6 +1,9 @@
+import os.path
 from itertools import combinations
 
-with open('input') as f:
+input_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), '../../input/day1')
+
+with open(input_path) as f:
     input = [int(x) for x in f.read().split('\n')]
 
     # Part 1
