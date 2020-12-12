@@ -26,44 +26,34 @@ class IntCodeVirtualMachine:
         return self.memory[pos]
 
     def run(self):
-        index = 0
-        while index < len(self.memory):
-            cmd = self.memory[index]
-            pos1 = self.memory[index + 1]
-            pos2 = self.memory[index + 2]
-            pos3 = self.memory[index + 3]
+        ptr = 0
+        while ptr < len(self.memory):
+            instruction = self.memory[ptr]
+            pos1 = self.memory[ptr + 1]
+            pos2 = self.memory[ptr + 2]
+            pos3 = self.memory[ptr + 3]
 
-            if cmd == self.ADD:
+            if instruction == self.ADD:
                 self.memory[pos3] = self.memory[pos1] + self.memory[pos2]
-                index += 4
-            elif cmd == self.MUL:
+                ptr += 4
+            elif instruction == self.MUL:
                 self.memory[pos3] = self.memory[pos1] * self.memory[pos2]
-                index += 4
-            elif cmd == self.END:
+                ptr += 4
+            elif instruction == self.END:
                 break
 
-    def debug(self):
-        index = 0
-        while index < len(self.memory):
-            cmd = self.memory[index]
-            pos1 = self.memory[index + 1]
-            pos2 = self.memory[index + 2]
-            pos3 = self.memory[index + 3]
 
-            print('index: ', index)
-            print('cmd: ', cmd)
-            
-            if cmd == self.ADD:
-                self.memory[pos3] = self.memory[pos1] + self.memory[pos2]
-                index += 4
-            elif cmd == self.MUL:
-                self.memory[pos3] = self.memory[pos1] * self.memory[pos2]
-                index += 4
-            elif cmd == self.END:
-                break
-                
-            yield
-
+def part2(input):
+    vm = IntCodeVirtualMachine(input)
+    
+    for noun in range(0, 100):
+        for verb in range(0, 100):
+            vm.reset()
+            vm.replace(1, noun)
+            vm.replace(2, verb)
+            vm.run()
+            if vm.memory[0] == 19690720:
+                return 100 * noun + verb
 
 with open(input_path) as f:
     input = f.read()
@@ -74,4 +64,4 @@ with open(input_path) as f:
     vm.run()
     
     print(f'Part 1: {vm.read(0)}')
-    # print(f'Part 2: ')
+    print(f'Part 2: {part2(input)}')
