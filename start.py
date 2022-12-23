@@ -48,9 +48,9 @@ try:
     elif (lang == 'javascript'):
         f = open(f'{year}/{lang}/day{day}/answer.js', 'w')
         f.writelines([
-            f'const fs = require("fs")\n\n',
-            'const input = fs.readFileSync("../../input/day{day}/input", { encoding: "utf8", flag: "r" })\n',
-            'const example = fs.readFileSync("../../input/day{day}/example", { encoding: "utf8", flag: "r" })\n\n'
+            'const fs = require("fs")\n\n',
+            f"const input = fs.readFileSync('../../input/day{day}/input', { encoding: 'utf8', flag: 'r' })\n",
+            f"const example = fs.readFileSync('../../input/day{day}/example', { encoding: 'utf8', flag: 'r' })\n\n"
         ])
         f.close()
 except:
